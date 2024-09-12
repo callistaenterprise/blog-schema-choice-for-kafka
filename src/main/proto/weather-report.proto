@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package se.martin.weather.proto;
+
+option java_multiple_files = true;
+option java_package = "se.martin.weather.proto";
+option java_outer_classname = "WeatherReportWrapper";
+
+// A schema for weather reports
+message WeatherReport {
+  string recordingId = 1; // A unique id for the recording
+  Location location = 2; // location of reading
+  string observationTimeUtc = 3; // Time of recording (UTC)
+  optional Observations observations = 4; // Measurements taken in the reading
+}
+
+message Location {
+  optional string name = 1; //Common name for station
+  string stationId = 2; // Code representing station
+  double latitude = 3; // latitude of recording station
+  double longitude = 4; // longitude of recording station
+  optional double elevation = 5; // elevation of recording station
+}
+
+message Observations {
+  double solarRadiation = 1; // Solar radiation
+  double ultraViolet = 2; // Ultraviolet measurement
+  double precipitationRate = 3; // Rate of rain
+  double precipitationTotal24hh = 4; // Total rain in preceding 24 hours
+  double temperatureCelsius = 5; // Temperature in degrees Celsius
+  double windChillCelsius = 6; // Experienced chill factor (in degress celsius)
+  double windSpeed = 7; // Wind Speed (meters per second)
+  Visibility visibility = 8;  // Perceived visibility measurement
+}
+
+enum Visibility {
+  GOOD = 0;
+  AVERAGE = 1;
+  POOR = 2;
+  DARKNESS = 3;
+}

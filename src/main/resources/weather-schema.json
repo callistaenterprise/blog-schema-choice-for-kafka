@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://se.martin/weather-schema.json",
+  "title": "Weather",
+  "description": "A schema for weather readings",
+  "type": "object",
+  "properties": {
+    "recordingId": {
+      "description": "A unique id for the recording",
+      "type": "string"
+    },
+    "location": {
+      "description": "location of reading",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Common name for station",
+          "type": "string",
+          "examples": ["Stockholm Waether Station 1"]
+        },
+        "stationId" : {
+          "description": "Code representing station",
+          "type": "string",
+          "examples": ["XA124589"]
+        },
+        "latitude": {
+          "description": "latitude of recording station",
+          "type": "number"
+        },
+        "longitude": {
+          "description": "longitude of recording station",
+          "type": "number"
+        },
+        "elevation": {
+          "description": "elevation of recording station",
+          "type": "number"
+        }
+      },
+      "required": [
+        "stationId", "latitude", "longitude"
+      ]
+    },
+    "observationTimeUtc": {
+      "description": "Time of recording (UTC)",
+      "type": "string"
+    },
+    "observations": {
+      "description": "Measurements taken in the reading",
+      "type": "object",
+      "properties": {
+        "solarRadiation": {
+          "description": "Solar radiation",
+          "type": "number"
+        },
+        "ultraViolet": {
+          "description": "Ultraviolet measurement",
+          "type": "number"
+        },
+        "precipitationRate": {
+          "description": "Volume of rain in the last hour (mm)",
+          "type":  "number"
+        },
+        "precipitationTotal24hh": {
+          "description": "Total rain in preceding 24 hours",
+          "type": "number"
+        },
+        "temperatureCelsius": {
+          "description": "Temperature in degrees Celsius",
+          "type": "number"
+        },
+        "windChillCelsius": {
+          "description": "Experienced chill factor (in degress celsius)",
+          "type": "number"
+        },
+        "windSpeed": {
+          "description": "Wind Speed (meters per second)",
+          "type": "number"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["good", "average", "poor", "total utter darkness"],
+          "description": "Perceived visibility measurement"
+        }
+      }
+    }
+  },
+  "required": [
+    "recordingId", "location", "observationTimeUtc"
+  ]
+}
